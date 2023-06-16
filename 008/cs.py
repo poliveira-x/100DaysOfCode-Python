@@ -1,39 +1,50 @@
 # Caesar Cipher
 #
 
-# put the alphabet into a string
+def encrypt(msg, key, letters):
+    encrypt_msg = ""
+    for i in message:
+        if i not in letters:
+            encrypt_msg += i
+        for j in range(26):
+            if i == letters[j]:
+                if j+key > 25:
+                    x = j+key - 26
+                    encrypt_msg += letters[x]
+                else:
+                    encrypt_msg += letters[j+key]
+
+    return(encrypt_msg)
+
+
+def decrypt(msg, key, letters):
+    decrypt_msg = ""
+    for i in message:
+        if i not in letters:
+            decrypt_msg += i
+        for j in range(26):
+            if i == letters[j]:
+                if j-key < 0:
+                    x = j-key + 26
+                    decrypt_msg += letters[x]
+                else:
+                    decrypt_msg += letters[j-key]
+
+    return(decrypt_msg)
+
+
 letters =""
 for i in range(97, 97+26):
     letters += chr(i)
 
+opt = input("\n(E)ncript or (D)ecript: ")[0].lower()
 
-# get a message to be encrypted and
-#turn it in lower case
 message = input("Message: ").lower()
 
-# get the encryptkey
 key = int(input("Type the key: "))
 
-
-# look for the letters and change
-# them using the key do that for
-# the whole message change only letters.
-
-encrypt_msg = ""
-for i in message:
-    for j in range(26):
-        if i == letters[j]:
-            if j+key > 25:
-                x = j+key - 26
-                encrypt_msg += letters[x]
-            else:
-                encrypt_msg += letters[j+key]
-
-
-
-
-print(encrypt_msg)
-
-
-
+if opt == 'd':
+    print(decrypt(message, key, letters))
+elif opt == 'e':
+    print(encrypt(message, key, letters))
 
