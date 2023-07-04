@@ -18,8 +18,9 @@ def div(n1, n2):
 
 num1 = 0
 result = 0
+repeat = 'y'
 
-for i in range(5):
+while repeat == 'y':
     if num1 == 0:
         num1 = float(input("What's the first number: "))
     
@@ -36,7 +37,11 @@ for i in range(5):
     elif op == '/':
         result = div(num1, num2)
 
-    print(f"\n {num1} + {num2} = {result}")   
+    print(f"\n {num1} {op} {num2} = {result}")   
+
+    repeat = input("Continue y/n: ")[0]
+    if repeat == 'n':
+      break
 
     again = input(f"\nType 'y' to continue calculating with {result} or 'n' to start a new calculation: ")[0]
     if again ==  'y':
