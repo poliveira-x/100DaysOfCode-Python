@@ -35,26 +35,7 @@ def check_winner(player):
 #
 #
 
-# 52 integers that representing the cards of a deck
-# the ace, jack, queen and king are represented as numbers
-# 4 repeated numbers to represent the 4 different kind of
-# cards in a deck
-#
-cards = [11, 11, 11, 11, # aces 
-         2, 2, 2, 2, 
-         3, 3, 3, 3, 
-         4, 4, 4, 4, 
-         5, 5, 5, 5, 
-         6, 6, 6, 6, 
-         7, 7, 7, 7, 
-         8, 8, 8, 8, 
-         9, 9, 9, 9, 
-         10, 10, 10, 10, 
-         10, 10, 10, 10, # jacks
-         10, 10, 10, 10, # queens
-         10, 10, 10, 10] # kings
-
-
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 user = []
 pc = []
@@ -62,14 +43,6 @@ pc = []
 #play = input("\nDo you want to play Y/N: ").lower()
 
 # pick 2 random numbers for both players
-#
-#
-# DELETE THE CHOSEN CARD FROM THE DECK
-# WHENEVER IT PICKS AN ACE, CHECK IF THE SUM
-# GOES OVER 21, IF SO THE ACE'S VALUE MUST BE
-# TRADDED INTO 1
-#
-#
 for x in range(2):
     user.append(choice(cards))
     pc.append(choice(cards))
@@ -103,6 +76,7 @@ while points(user) < 21 or points(pc) < 21:
 
 # check whether points reached or went
 # over 21
+
 
 
 
