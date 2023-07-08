@@ -1,26 +1,14 @@
 #
 # Blackjack
 #
-#This version doesn't consider the total
-#amount of cards in a real deck. thus,
-#it won't delete the cards as they're
-#drawn from the deck.
-#
 
 from random import choice
 
-# The ace counts 11 unless the total sum
-# more than 21, in this case it sums 1.
-#
-# jack, queen and king cards count as 10.
-
-
-# sum the the amount of points
+# sum the the total of points
 def points(lst):
     total = 0
     for i in lst:
         total += i
-
     return total
 
 
@@ -31,14 +19,13 @@ def check_winner(player):
     else:
         return False
 
-#
-#
-#
 
-# 52 integers that representing the cards of a deck
-# the ace, jack, queen and king are represented as numbers
-# 4 repeated numbers to represent the 4 different kind of
-# cards in a deck
+#
+# 52 integers that representing the cards
+# of a deck the ace, jack, queen and king
+# are represented as numbers. 4 repeated
+# numbers to represent the 4 different
+# suit of cards in a deck
 #
 cards = [11, 11, 11, 11, # aces 
          2, 2, 2, 2, 
@@ -54,38 +41,35 @@ cards = [11, 11, 11, 11, # aces
          10, 10, 10, 10, # queens
          10, 10, 10, 10] # kings
 
-
-
 user = []
 pc = []
 
-#play = input("\nDo you want to play Y/N: ").lower()
-
-# pick 2 random numbers for both players
-#
-#
-# DELETE THE CHOSEN CARD FROM THE DECK
-# WHENEVER IT PICKS AN ACE, CHECK IF THE SUM
-# GOES OVER 21, IF SO THE ACE'S VALUE MUST BE
-# TRADDED INTO 1
-#
-#
+# pick 2 random cards for both players
+# and delete them from the deck
 for x in range(2):
-    user.append(choice(cards))
+    card = choice(cards)
+    user.append(card)
+    cards.remove(card)
+
+    card = choice(cards)
     pc.append(choice(cards))
+    cards.remove(card)
+
+# The ace counts 11 unless the total sum
+# goes over 21, in this case the last
+# drawn ace counts 1.
+if user[1] == 11 and points(user) > 21:
+    user[1] = 1
+
+if pc[1] == 11 and points(pc) > 21:
+    pc[1] = 1
 
 
 while points(user) < 21 or points(pc) < 21:
     print(f"\nYour cards: {user}")
-    print(f"Compiter's first card: [{pc[0]}]\n")
+    print(f"Computer's first card: [{pc[0]}]\n")
 
-
-
-    print(f"\n\n\nUser {user} = {sum(user)}\nPC {pc} = {sum(pc)} \n\n\n")
-    
-
-
-    # Check winner
+# Check winner
     if check_winner(user) or points(pc) > 21:
        print("\nYou win!\n")
        break
@@ -95,15 +79,18 @@ while points(user) < 21 or points(pc) < 21:
 
     another = input("\nType Y to get another card or N to pass: ").lower()
 
-# give the player or the pc a new card
+# give the user or the pc a new card
     if another == 'y':
-        user.append(choice(cards))
+        card = choice(cards)
+        cards.remove(card)
+        if card == 11 and points(user)+card > 21:
+            card = 1
+        user.append(card)
     else:
-        pc.append(choice(cards))
-
-# check whether points reached or went
-# over 21
-
-
+        card = choice(cards)
+        cards.remove(card)
+        if card == 11 and points(pc)+card > 21:
+            card = 1
+        pc.append(card)
 
 
