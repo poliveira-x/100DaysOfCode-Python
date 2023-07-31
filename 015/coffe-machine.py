@@ -39,13 +39,34 @@ resources = {
 #
 #
 
+# Report
 def report():
+    print('\n\n')
+    print('='*50)
     for i in MENU:
-        print(i)
-        print(MENU[i]['ingredients'])
+        print(f"{i}\n{MENU[i]['ingredients']}\n")
+    print('='*50,'\n')
 
 
 
+
+
+# Check suficient ressources
+'''
+4. Check resources sufficient?
+a. When the user chooses a drink, the program should check if there are enough
+resources to make that drink.
+b. E.g. if Latte requires 200ml water but there is only 100ml left in the machine. It should
+not continue to make the drink but print: “Sorry there is not enough water.”
+c. The same should happen if another resource is depleted, e.g. milk or coffee.
+'''
+
+def check_sufficient(option):
+    for i in MENU[option]['ingredients']:
+        if MENU[option]['ingredients'][i] >= resources[i]:
+            return True
+        else:
+            return i 
 
 
 '''
@@ -58,36 +79,27 @@ a. For maintainers of the coffee machine, they can use “off” as the secret w
 the machine. Your code should end execution when this happens.
 '''
 
-option = input("What would you like? (espresso/latte/cappuccino):").lower()
-if option == 'espresso':
-    pass
-elif option == 'latte':
-    pass
-elif option == 'cappuccino':
-    pass
-elif option == 'off':
-    print("\nTurning off...\n")
-    pass
-elif option == 'report':
-    report()
+option = input("What would you like? (espresso/latte/cappuccino): ").lower()
 
-
-
-
-
-'''
-3. Print report.
-a. When the user enters “report” to the prompt, a report should be generated that shows
-the current resource values. e.g.
-Water: 100ml
-Milk: 50ml
-Coffee: 76g
-Money: $2.5
-'''
-
-
-
-
+resource = check_sufficient(option)
+if resource != True:
+    print(f"Sorry there is not enough {resource}.")
+else:
+    if option == 'espresso':
+        check_sufficient(option)
+        #pass
+        
+    elif option == 'latte':
+        check_sufficient(option)
+        pass
+    elif option == 'cappuccino':
+        pass
+    elif option == 'off':
+        print("\nTurning off...\n")
+        #break
+        pass
+    elif option == 'report':
+        report()
 
 
 '''
